@@ -15,3 +15,4 @@ a few things before start:
 4. The results will need post-processing as follow: 
     For manual pipeline: (distance-1px)*distancePerPixel (0.11nm/px in the examples) to calculate distance Relate per nucleus intensity in nuclei.txt output to TSS to calculate normalized intensity.
     For auto pipeline:distance * distancePerPixel
+    I remove data with larger than 2nm distance to speckle, as these are mostly junk.
