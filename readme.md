@@ -19,3 +19,5 @@ a few things before start:
     For auto pipeline:distance * distancePerPixel.
     
     I remove data with larger than 2nm distance to speckle, as these are mostly junk.
+
+5. Things get tricky if no FISH spot is present, may need to manual edit object in that case. 
