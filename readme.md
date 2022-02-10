@@ -2,6 +2,10 @@ Upgrade v1.1 2/9/2022:
 
 Adjusted some settings for our new scope, should deal better with noisy background.
 
+An example of comparison between semi-manual (With Raj lab imagetool) and this automatic pipeline:
+
+![alt text](https://github.com/Chalietia/CellProfiler/blob/main/misc/Screen%20Shot%202022-02-10%20at%2010.23.32%20AM.png)
+
 
 
 ########################################################################
