@@ -1,3 +1,9 @@
+Upgrade v1.1 2/9/2022:
+
+Adjusted some settings for our new scope, should deal better with noisy background.
+
+
+
 ########################################################################
 
 TSSquant ver1.0 made by Ruofan Yu, Berger lab, Upenn. 02/08/2022 
