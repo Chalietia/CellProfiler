@@ -1,0 +1,861 @@
+CellProfiler Pipeline: http://www.cellprofiler.org
+Version:5
+DateRevision:421
+GitHash:
+ModuleCount:55
+HasImagePlaneDetails:False
+
+Images:[module_num:1|svn_version:'Unknown'|variable_revision_number:2|show_window:False|notes:['To begin creating your project, use the Images module to compile a list of files and/or folders that you want to analyze. You can also specify a set of rules to include only the desired files in your selected folders.']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    :
+    Filter images?:Images only
+    Select the rule criteria:and (extension does isimage) (directory doesnot containregexp "[\\\\\\\\/]\\\\.")
+
+Metadata:[module_num:2|svn_version:'Unknown'|variable_revision_number:6|show_window:False|notes:['The Metadata module optionally allows you to extract information describing your images (i.e, metadata) which will be stored along with your measurements. This information can be contained in the file name and/or location, or in an external file.']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Extract metadata?:Yes
+    Metadata data type:Text
+    Metadata types:{}
+    Extraction method count:1
+    Metadata extraction method:Extract from file/folder names
+    Metadata source:File name
+    Regular expression to extract from file name:^(?P<Plate>.*)_(?P<Well>[A-P][0-9]{2})_s(?P<Site>[0-9])_w(?P<ChannelNumber>[0-9])
+    Regular expression to extract from folder name:(?P<Date>[0-9]{4}_[0-9]{2}_[0-9]{2})$
+    Extract metadata from:All images
+    Select the filtering criteria:and (file does contain "")
+    Metadata file location:Elsewhere...|
+    Match file and image metadata:[]
+    Use case insensitive matching?:No
+    Metadata file name:
+    Does cached metadata exist?:No
+
+NamesAndTypes:[module_num:3|svn_version:'Unknown'|variable_revision_number:8|show_window:False|notes:['The NamesAndTypes module allows you to assign a meaningful name to each image by which other modules will refer to it.']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Assign a name to:Images matching rules
+    Select the image type:Grayscale image
+    Name to assign these images:DNA
+    Match metadata:[]
+    Image set matching method:Order
+    Set intensity range from:Image metadata
+    Assignments count:4
+    Single images count:0
+    Maximum intensity:255.0
+    Process as 3D?:No
+    Relative pixel spacing in X:1.0
+    Relative pixel spacing in Y:1.0
+    Relative pixel spacing in Z:1.0
+    Select the rule criteria:and (file does contain "DAPI")
+    Name to assign these images:DAPI
+    Name to assign these objects:Cell
+    Select the image type:Grayscale image
+    Set intensity range from:Image metadata
+    Maximum intensity:255.0
+    Select the rule criteria:and (file does contain "YFP")
+    Name to assign these images:YFP
+    Name to assign these objects:Nucleus
+    Select the image type:Grayscale image
+    Set intensity range from:Image metadata
+    Maximum intensity:255.0
+    Select the rule criteria:and (file does contain "A594")
+    Name to assign these images:A594
+    Name to assign these objects:Nucleus
+    Select the image type:Grayscale image
+    Set intensity range from:Image metadata
+    Maximum intensity:255.0
+    Select the rule criteria:and (file does contain "CY3")
+    Name to assign these images:CY3
+    Name to assign these objects:Nucleus
+    Select the image type:Grayscale image
+    Set intensity range from:Image metadata
+    Maximum intensity:255.0
+
+Groups:[module_num:4|svn_version:'Unknown'|variable_revision_number:2|show_window:False|notes:['The Groups module optionally allows you to split your list of images into image subsets (groups) which will be processed independently of each other. Examples of groupings include screening batches, microtiter plates, time-lapse movies, etc.']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Do you want to group your images?:No
+    grouping metadata count:1
+    Metadata category:None
+
+CorrectIlluminationCalculate:[module_num:5|svn_version:'Unknown'|variable_revision_number:2|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:A594
+    Name the output image:A594func
+    Select how the illumination function is calculated:Regular
+    Dilate objects in the final averaged image?:No
+    Dilation radius:1
+    Block size:1
+    Rescale the illumination function?:Yes
+    Calculate function for each image individually, or based on all images?:Each
+    Smoothing method:Fit Polynomial
+    Method to calculate smoothing filter size:Automatic
+    Approximate object diameter:10
+    Smoothing filter size:10
+    Retain the averaged image?:No
+    Name the averaged image:IllumBlueAvg
+    Retain the dilated image?:No
+    Name the dilated image:IllumBlueDilated
+    Automatically calculate spline parameters?:Yes
+    Background mode:auto
+    Number of spline points:5
+    Background threshold:2.0
+    Image resampling factor:2.0
+    Maximum number of iterations:40
+    Residual value for convergence:0.001
+
+CorrectIlluminationApply:[module_num:6|svn_version:'Unknown'|variable_revision_number:5|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:A594
+    Name the output image:A594corrected
+    Select the illumination function:A594func
+    Select how the illumination function is applied:Divide
+    Set output image values less than 0 equal to 0?:Yes
+    Set output image values greater than 1 equal to 1?:Yes
+
+CorrectIlluminationCalculate:[module_num:7|svn_version:'Unknown'|variable_revision_number:2|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:YFP
+    Name the output image:YFPfunc
+    Select how the illumination function is calculated:Regular
+    Dilate objects in the final averaged image?:No
+    Dilation radius:1
+    Block size:1
+    Rescale the illumination function?:Yes
+    Calculate function for each image individually, or based on all images?:Each
+    Smoothing method:Fit Polynomial
+    Method to calculate smoothing filter size:Automatic
+    Approximate object diameter:10
+    Smoothing filter size:10
+    Retain the averaged image?:No
+    Name the averaged image:IllumBlueAvg
+    Retain the dilated image?:No
+    Name the dilated image:IllumBlueDilated
+    Automatically calculate spline parameters?:Yes
+    Background mode:auto
+    Number of spline points:5
+    Background threshold:2.0
+    Image resampling factor:2.0
+    Maximum number of iterations:40
+    Residual value for convergence:0.001
+
+CorrectIlluminationApply:[module_num:8|svn_version:'Unknown'|variable_revision_number:5|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:YFP
+    Name the output image:YFPcorrected
+    Select the illumination function:YFPfunc
+    Select how the illumination function is applied:Divide
+    Set output image values less than 0 equal to 0?:Yes
+    Set output image values greater than 1 equal to 1?:Yes
+
+IdentifyPrimaryObjects:[module_num:9|svn_version:'Unknown'|variable_revision_number:15|show_window:False|notes:['Identify nuclei in the DAPI image, but exclude those that touch edge of image ("Nuclei").']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:DAPI
+    Name the primary objects to be identified:Nuclei
+    Typical diameter of objects, in pixel units (Min,Max):120,250
+    Discard objects outside the diameter range?:Yes
+    Discard objects touching the border of the image?:Yes
+    Method to distinguish clumped objects:Shape
+    Method to draw dividing lines between clumped objects:Propagate
+    Size of smoothing filter:20
+    Suppress local maxima that are closer than this minimum allowed distance:300
+    Speed up by using lower-resolution image to find local maxima?:Yes
+    Fill holes in identified objects?:After both thresholding and declumping
+    Automatically calculate size of smoothing filter for declumping?:Yes
+    Automatically calculate minimum allowed distance between local maxima?:Yes
+    Handling of objects if excessive number of objects identified:Continue
+    Maximum number of objects:500
+    Use advanced settings?:Yes
+    Threshold setting version:12
+    Threshold strategy:Adaptive
+    Thresholding method:Otsu
+    Threshold smoothing scale:1.3488
+    Threshold correction factor:0.8
+    Lower and upper bounds on threshold:0.0,1.0
+    Manual threshold:0.0
+    Select the measurement to threshold with:None
+    Two-class or three-class thresholding?:Three classes
+    Log transform before thresholding?:No
+    Assign pixels in the middle intensity class to the foreground or the background?:Background
+    Size of adaptive window:100
+    Lower outlier fraction:0.05
+    Upper outlier fraction:0.05
+    Averaging method:Median
+    Variance method:Standard deviation
+    # of deviations:2.0
+    Thresholding method:Otsu
+
+IdentifyPrimaryObjects:[module_num:10|svn_version:'Unknown'|variable_revision_number:15|show_window:False|notes:['Identify nuclei in the DAPI image, including those that touch edge of image (preNucleiWithEdges).']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:DAPI
+    Name the primary objects to be identified:preNucleiWithEdges
+    Typical diameter of objects, in pixel units (Min,Max):100,300
+    Discard objects outside the diameter range?:Yes
+    Discard objects touching the border of the image?:No
+    Method to distinguish clumped objects:Intensity
+    Method to draw dividing lines between clumped objects:Intensity
+    Size of smoothing filter:10
+    Suppress local maxima that are closer than this minimum allowed distance:7.0
+    Speed up by using lower-resolution image to find local maxima?:Yes
+    Fill holes in identified objects?:After both thresholding and declumping
+    Automatically calculate size of smoothing filter for declumping?:Yes
+    Automatically calculate minimum allowed distance between local maxima?:Yes
+    Handling of objects if excessive number of objects identified:Continue
+    Maximum number of objects:500
+    Use advanced settings?:Yes
+    Threshold setting version:12
+    Threshold strategy:Adaptive
+    Thresholding method:Otsu
+    Threshold smoothing scale:1.3488
+    Threshold correction factor:0.8
+    Lower and upper bounds on threshold:0.0,1.0
+    Manual threshold:0.0
+    Select the measurement to threshold with:None
+    Two-class or three-class thresholding?:Three classes
+    Log transform before thresholding?:No
+    Assign pixels in the middle intensity class to the foreground or the background?:Background
+    Size of adaptive window:100
+    Lower outlier fraction:0.05
+    Upper outlier fraction:0.05
+    Averaging method:Mean
+    Variance method:Standard deviation
+    # of deviations:2.0
+    Thresholding method:Otsu
+
+GaussianFilter:[module_num:11|svn_version:'Unknown'|variable_revision_number:1|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:A594corrected
+    Name the output image:A594GF
+    Sigma:1
+
+ExpandOrShrinkObjects:[module_num:12|svn_version:'Unknown'|variable_revision_number:2|show_window:False|notes:['I add this step to eliminate spots right on edge of nucleus, which are mostly noise.']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input objects:preNucleiWithEdges
+    Name the output objects:NucleiShrinked
+    Select the operation:Shrink objects by a specified number of pixels
+    Number of pixels by which to expand or shrink:3
+    Fill holes in objects so that all objects shrink to a single point?:No
+
+MaskImage:[module_num:13|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:['Remove nuclear (NucleiWithEdges) regions from "signal" image, producing ‘MaskSignal’ image.']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:A594corrected
+    Name the output image:MaskA594
+    Use objects or an image as a mask?:Objects
+    Select object for mask:preNucleiWithEdges
+    Select image for mask:None
+    Invert the mask?:Yes
+
+MaskImage:[module_num:14|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:['Remove nuclear (Nuclei) regions from "signal" image, producing ‘Signal_in_Nuclei’ image.']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:A594GF
+    Name the output image:A594_in_Nuclei
+    Use objects or an image as a mask?:Objects
+    Select object for mask:NucleiShrinked
+    Select image for mask:None
+    Invert the mask?:No
+
+GaussianFilter:[module_num:15|svn_version:'Unknown'|variable_revision_number:1|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:CY3
+    Name the output image:CY3GF
+    Sigma:1
+
+MaskImage:[module_num:16|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:CY3GF
+    Name the output image:CY3_in_Nuclei
+    Use objects or an image as a mask?:Objects
+    Select object for mask:NucleiShrinked
+    Select image for mask:None
+    Invert the mask?:No
+
+EnhanceOrSuppressFeatures:[module_num:17|svn_version:'Unknown'|variable_revision_number:7|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:A594_in_Nuclei
+    Name the output image:A594GFenhance
+    Select the operation:Enhance
+    Feature size:10
+    Feature type:Speckles
+    Range of hole sizes:1,10
+    Smoothing scale:2.0
+    Shear angle:0.0
+    Decay:0.95
+    Enhancement method:Tubeness
+    Speed and accuracy:Fast
+    Rescale result image:No
+
+EnhanceOrSuppressFeatures:[module_num:18|svn_version:'Unknown'|variable_revision_number:7|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:A594GFenhance
+    Name the output image:A594GFenhance2
+    Select the operation:Enhance
+    Feature size:10
+    Feature type:Speckles
+    Range of hole sizes:1,10
+    Smoothing scale:2.0
+    Shear angle:0.0
+    Decay:0.95
+    Enhancement method:Tubeness
+    Speed and accuracy:Fast
+    Rescale result image:No
+
+MeasureImageIntensity:[module_num:19|svn_version:'Unknown'|variable_revision_number:4|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select images to measure:A594GFenhance2
+    Measure the intensity only from areas enclosed by objects?:No
+    Select input object sets:Nuclei
+    Calculate custom percentiles:No
+    Specify percentiles to measure:10,95
+
+ImageMath:[module_num:20|svn_version:'Unknown'|variable_revision_number:5|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Operation:Subtract
+    Raise the power of the result by:1.0
+    Multiply the result by:1.0
+    Add to result:0.0
+    Set values less than 0 equal to 0?:Yes
+    Set values greater than 1 equal to 1?:Yes
+    Replace invalid values with 0?:Yes
+    Ignore the image masks?:No
+    Name the output image:A594subtract
+    Image or measurement?:Image
+    Select the first image:A594GFenhance2
+    Multiply the first image by:1.0
+    Measurement:
+    Image or measurement?:Measurement
+    Select the second image:None
+    Multiply the second image by:1.0
+    Measurement:Intensity_MedianIntensity_A594GFenhance2
+
+IdentifyPrimaryObjects:[module_num:21|svn_version:'Unknown'|variable_revision_number:15|show_window:False|notes:['Identify nuclear signals (FISH signals).']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:A594GFenhance2
+    Name the primary objects to be identified:a594signals
+    Typical diameter of objects, in pixel units (Min,Max):2,10
+    Discard objects outside the diameter range?:Yes
+    Discard objects touching the border of the image?:No
+    Method to distinguish clumped objects:Intensity
+    Method to draw dividing lines between clumped objects:Intensity
+    Size of smoothing filter:10
+    Suppress local maxima that are closer than this minimum allowed distance:7.0
+    Speed up by using lower-resolution image to find local maxima?:Yes
+    Fill holes in identified objects?:After both thresholding and declumping
+    Automatically calculate size of smoothing filter for declumping?:Yes
+    Automatically calculate minimum allowed distance between local maxima?:Yes
+    Handling of objects if excessive number of objects identified:Continue
+    Maximum number of objects:500
+    Use advanced settings?:Yes
+    Threshold setting version:12
+    Threshold strategy:Adaptive
+    Thresholding method:Otsu
+    Threshold smoothing scale:1.3488
+    Threshold correction factor:0.8
+    Lower and upper bounds on threshold:0.0,1.0
+    Manual threshold:0.2
+    Select the measurement to threshold with:None
+    Two-class or three-class thresholding?:Two classes
+    Log transform before thresholding?:No
+    Assign pixels in the middle intensity class to the foreground or the background?:Background
+    Size of adaptive window:20
+    Lower outlier fraction:0
+    Upper outlier fraction:0.05
+    Averaging method:Mean
+    Variance method:Standard deviation
+    # of deviations:2.0
+    Thresholding method:Otsu
+
+EnhanceOrSuppressFeatures:[module_num:22|svn_version:'Unknown'|variable_revision_number:7|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:CY3_in_Nuclei
+    Name the output image:CY3enhance
+    Select the operation:Enhance
+    Feature size:10
+    Feature type:Speckles
+    Range of hole sizes:1,10
+    Smoothing scale:2.0
+    Shear angle:0.0
+    Decay:0.95
+    Enhancement method:Tubeness
+    Speed and accuracy:Fast
+    Rescale result image:No
+
+MeasureImageIntensity:[module_num:23|svn_version:'Unknown'|variable_revision_number:4|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select images to measure:CY3enhance
+    Measure the intensity only from areas enclosed by objects?:No
+    Select input object sets:Nuclei
+    Calculate custom percentiles:No
+    Specify percentiles to measure:10,95
+
+ImageMath:[module_num:24|svn_version:'Unknown'|variable_revision_number:5|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Operation:Subtract
+    Raise the power of the result by:1.0
+    Multiply the result by:1.0
+    Add to result:0.0
+    Set values less than 0 equal to 0?:Yes
+    Set values greater than 1 equal to 1?:Yes
+    Replace invalid values with 0?:Yes
+    Ignore the image masks?:No
+    Name the output image:CY3subtract
+    Image or measurement?:Image
+    Select the first image:CY3enhance
+    Multiply the first image by:1.0
+    Measurement:
+    Image or measurement?:Measurement
+    Select the second image:None
+    Multiply the second image by:1.0
+    Measurement:Intensity_UpperQuartileIntensity_CY3enhance
+
+IdentifyPrimaryObjects:[module_num:25|svn_version:'Unknown'|variable_revision_number:15|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:CY3subtract
+    Name the primary objects to be identified:CY3Spot
+    Typical diameter of objects, in pixel units (Min,Max):3,20
+    Discard objects outside the diameter range?:Yes
+    Discard objects touching the border of the image?:Yes
+    Method to distinguish clumped objects:Intensity
+    Method to draw dividing lines between clumped objects:Intensity
+    Size of smoothing filter:10
+    Suppress local maxima that are closer than this minimum allowed distance:7.0
+    Speed up by using lower-resolution image to find local maxima?:Yes
+    Fill holes in identified objects?:After both thresholding and declumping
+    Automatically calculate size of smoothing filter for declumping?:Yes
+    Automatically calculate minimum allowed distance between local maxima?:Yes
+    Handling of objects if excessive number of objects identified:Continue
+    Maximum number of objects:500
+    Use advanced settings?:Yes
+    Threshold setting version:12
+    Threshold strategy:Global
+    Thresholding method:Minimum Cross-Entropy
+    Threshold smoothing scale:1.3488
+    Threshold correction factor:1.0
+    Lower and upper bounds on threshold:0.0,1.0
+    Manual threshold:0.0
+    Select the measurement to threshold with:None
+    Two-class or three-class thresholding?:Two classes
+    Log transform before thresholding?:No
+    Assign pixels in the middle intensity class to the foreground or the background?:Foreground
+    Size of adaptive window:60
+    Lower outlier fraction:0.05
+    Upper outlier fraction:0.05
+    Averaging method:Mean
+    Variance method:Standard deviation
+    # of deviations:2.0
+    Thresholding method:Minimum Cross-Entropy
+
+ExpandOrShrinkObjects:[module_num:26|svn_version:'Unknown'|variable_revision_number:2|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input objects:CY3Spot
+    Name the output objects:ExpandCY3
+    Select the operation:Expand objects by a specified number of pixels
+    Number of pixels by which to expand or shrink:5
+    Fill holes in objects so that all objects shrink to a single point?:No
+
+IdentifySecondaryObjects:[module_num:27|svn_version:'Unknown'|variable_revision_number:10|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:False|wants_pause:False]
+    Select the input objects:preNucleiWithEdges
+    Name the objects to be identified:exonWithinNucleus
+    Select the method to identify the secondary objects:Propagation
+    Select the input image:CY3
+    Number of pixels by which to expand the primary objects:10
+    Regularization factor:0.05
+    Discard secondary objects touching the border of the image?:No
+    Discard the associated primary objects?:No
+    Name the new primary objects:FilteredNuclei
+    Fill holes in identified objects?:Yes
+    Threshold setting version:12
+    Threshold strategy:Global
+    Thresholding method:Minimum Cross-Entropy
+    Threshold smoothing scale:0.0
+    Threshold correction factor:1.0
+    Lower and upper bounds on threshold:0.0,1.0
+    Manual threshold:0.0
+    Select the measurement to threshold with:None
+    Two-class or three-class thresholding?:Two classes
+    Log transform before thresholding?:No
+    Assign pixels in the middle intensity class to the foreground or the background?:Foreground
+    Size of adaptive window:50
+    Lower outlier fraction:0.05
+    Upper outlier fraction:0.05
+    Averaging method:Mean
+    Variance method:Standard deviation
+    # of deviations:2.0
+    Thresholding method:Minimum Cross-Entropy
+
+MaskObjects:[module_num:28|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select objects to be masked:a594signals
+    Name the masked objects:a594CYcoloc
+    Mask using a region defined by other objects or by binary image?:Objects
+    Select the masking object:ExpandCY3
+    Select the masking image:None
+    Handling of objects that are partially masked:Keep overlapping region
+    Fraction of object that must overlap:0.5
+    Numbering of resulting objects:Renumber
+    Invert the mask?:No
+
+FilterObjects:[module_num:29|svn_version:'Unknown'|variable_revision_number:9|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:False|wants_pause:False]
+    Select the objects to filter:a594CYcoloc
+    Name the output objects:a594Top2
+    Select the filtering mode:Measurements
+    Select the filtering method:Maximal per object
+    Select the objects that contain the filtered objects:preNucleiWithEdges
+    Select the location of the rules or classifier file:Elsewhere...|
+    Rules or classifier file name:rules.txt
+    Class number:1
+    Measurement count:1
+    Additional object count:0
+    Assign overlapping child to:Both parents
+    Keep removed objects as a seperate set?:No
+    Name the objects removed by the filter:RemovedObjects
+    Select the measurement to filter by:Number_Object_Number
+    Filter using a minimum measurement value?:Yes
+    Minimum value:0.0
+    Filter using a maximum measurement value?:Yes
+    Maximum value:3
+
+EnhanceOrSuppressFeatures:[module_num:30|svn_version:'Unknown'|variable_revision_number:7|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:False|wants_pause:False]
+    Select the input image:ImageAfterMath
+    Name the output image:EnhancedA594
+    Select the operation:Enhance
+    Feature size:5
+    Feature type:Speckles
+    Range of hole sizes:1,10
+    Smoothing scale:2.0
+    Shear angle:0.0
+    Decay:0.95
+    Enhancement method:Tubeness
+    Speed and accuracy:Fast
+    Rescale result image:No
+
+IdentifyPrimaryObjects:[module_num:31|svn_version:'Unknown'|variable_revision_number:15|show_window:False|notes:['Identify bright background signals in ‘MaskSignal’ image (background_foci).']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:MaskA594
+    Name the primary objects to be identified:background_foci
+    Typical diameter of objects, in pixel units (Min,Max):10,100
+    Discard objects outside the diameter range?:Yes
+    Discard objects touching the border of the image?:No
+    Method to distinguish clumped objects:Intensity
+    Method to draw dividing lines between clumped objects:Intensity
+    Size of smoothing filter:10
+    Suppress local maxima that are closer than this minimum allowed distance:7.0
+    Speed up by using lower-resolution image to find local maxima?:Yes
+    Fill holes in identified objects?:After both thresholding and declumping
+    Automatically calculate size of smoothing filter for declumping?:Yes
+    Automatically calculate minimum allowed distance between local maxima?:Yes
+    Handling of objects if excessive number of objects identified:Continue
+    Maximum number of objects:500
+    Use advanced settings?:Yes
+    Threshold setting version:12
+    Threshold strategy:Global
+    Thresholding method:Otsu
+    Threshold smoothing scale:1.3488
+    Threshold correction factor:1.0
+    Lower and upper bounds on threshold:0.0,1.0
+    Manual threshold:0.225
+    Select the measurement to threshold with:None
+    Two-class or three-class thresholding?:Two classes
+    Log transform before thresholding?:No
+    Assign pixels in the middle intensity class to the foreground or the background?:Foreground
+    Size of adaptive window:50
+    Lower outlier fraction:0
+    Upper outlier fraction:0.05
+    Averaging method:Mean
+    Variance method:Standard deviation
+    # of deviations:2.0
+    Thresholding method:Otsu
+
+ExpandOrShrinkObjects:[module_num:32|svn_version:'Unknown'|variable_revision_number:2|show_window:False|notes:['Expand "background_foci" (focalBackground).']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input objects:background_foci
+    Name the output objects:focalBackground
+    Select the operation:Expand objects by a specified number of pixels
+    Number of pixels by which to expand or shrink:20
+    Fill holes in objects so that all objects shrink to a single point?:No
+
+MaskImage:[module_num:33|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:['Add an additional mask to ‘MaskSignal" using expanded background foci (debrisSignalMask).']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:MaskA594
+    Name the output image:debrisSignalMask
+    Use objects or an image as a mask?:Objects
+    Select object for mask:focalBackground
+    Select image for mask:None
+    Invert the mask?:Yes
+
+MaskImage:[module_num:34|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:['Mask ‘Nuclei’ in signalMaskedforFISH image keeping only nuclei (MaskSignal_noInv).']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:MaskA594
+    Name the output image:MaskSignal_noInv
+    Use objects or an image as a mask?:Objects
+    Select object for mask:preNucleiWithEdges
+    Select image for mask:None
+    Invert the mask?:No
+
+MaskImage:[module_num:35|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:['Mask FISHsignals in input signal image (signalMaskedforFISH).']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:A594corrected
+    Name the output image:signalMaskedforFISH
+    Use objects or an image as a mask?:Objects
+    Select object for mask:a594signals
+    Select image for mask:None
+    Invert the mask?:Yes
+
+IdentifySecondaryObjects:[module_num:36|svn_version:'Unknown'|variable_revision_number:10|show_window:False|notes:['Identify cell bodies in ‘signalMaskedforFISH’ image growing form ‘NucleiWithEdges’ (CellBodies).']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input objects:background_foci
+    Name the objects to be identified:CellBodies
+    Select the method to identify the secondary objects:Watershed - Image
+    Select the input image:A594corrected
+    Number of pixels by which to expand the primary objects:20
+    Regularization factor:0.05
+    Discard secondary objects touching the border of the image?:No
+    Discard the associated primary objects?:No
+    Name the new primary objects:FilteredNuclei
+    Fill holes in identified objects?:Yes
+    Threshold setting version:12
+    Threshold strategy:Global
+    Thresholding method:Otsu
+    Threshold smoothing scale:0.0
+    Threshold correction factor:1.0
+    Lower and upper bounds on threshold:0.0,1.0
+    Manual threshold:0.0
+    Select the measurement to threshold with:None
+    Two-class or three-class thresholding?:Two classes
+    Log transform before thresholding?:No
+    Assign pixels in the middle intensity class to the foreground or the background?:Foreground
+    Size of adaptive window:50
+    Lower outlier fraction:0.05
+    Upper outlier fraction:0.05
+    Averaging method:Mean
+    Variance method:Standard deviation
+    # of deviations:2.0
+    Thresholding method:Otsu
+
+ExpandOrShrinkObjects:[module_num:37|svn_version:'Unknown'|variable_revision_number:2|show_window:False|notes:['Expand ‘CellBodies’ objects (expandedCellBodies).']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input objects:CellBodies
+    Name the output objects:expandedCellBodies
+    Select the operation:Expand objects by a specified number of pixels
+    Number of pixels by which to expand or shrink:20
+    Fill holes in objects so that all objects shrink to a single point?:No
+
+Threshold:[module_num:38|svn_version:'Unknown'|variable_revision_number:12|show_window:False|notes:['Use a threshold to futher supress cellular background and random noise (Threshold).']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:debrisSignalMask
+    Name the output image:Threshold
+    Threshold strategy:Global
+    Thresholding method:Otsu
+    Threshold smoothing scale:0.0
+    Threshold correction factor:1.0
+    Lower and upper bounds on threshold:0.0,1.0
+    Manual threshold:0.0
+    Select the measurement to threshold with:None
+    Two-class or three-class thresholding?:Two classes
+    Log transform before thresholding?:No
+    Assign pixels in the middle intensity class to the foreground or the background?:Foreground
+    Size of adaptive window:50
+    Lower outlier fraction:0.05
+    Upper outlier fraction:0.05
+    Averaging method:Mean
+    Variance method:Standard deviation
+    # of deviations:2.0
+    Thresholding method:Otsu
+
+MaskImage:[module_num:39|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:['Use ‘expandedCellBodies’ to mask  ‘debrisSignalMask’ (expandedSignalMask).']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:debrisSignalMask
+    Name the output image:expandedSignalMask
+    Use objects or an image as a mask?:Objects
+    Select object for mask:expandedCellBodies
+    Select image for mask:None
+    Invert the mask?:Yes
+
+MaskImage:[module_num:40|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:['Use ‘Threshold’ to expand mask even futher (finalSignalMask).']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:expandedSignalMask
+    Name the output image:finalSignalMask
+    Use objects or an image as a mask?:Image
+    Select object for mask:expandedCellBodies
+    Select image for mask:Threshold
+    Invert the mask?:Yes
+
+IdentifySecondaryObjects:[module_num:41|svn_version:'Unknown'|variable_revision_number:10|show_window:False|notes:['Idenitfy nuclei in signal channel using ‘Nuclei’ objects and ‘MaskSignal_noInv’ image (NuclearBackgroundSignal).']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input objects:preNucleiWithEdges
+    Name the objects to be identified:NuclearBackgroundSignal
+    Select the method to identify the secondary objects:Propagation
+    Select the input image:MaskSignal_noInv
+    Number of pixels by which to expand the primary objects:10
+    Regularization factor:0.05
+    Discard secondary objects touching the border of the image?:No
+    Discard the associated primary objects?:No
+    Name the new primary objects:FilteredNuclei
+    Fill holes in identified objects?:Yes
+    Threshold setting version:12
+    Threshold strategy:Global
+    Thresholding method:Otsu
+    Threshold smoothing scale:0.0
+    Threshold correction factor:1.0
+    Lower and upper bounds on threshold:0.0,1.0
+    Manual threshold:0.0
+    Select the measurement to threshold with:None
+    Two-class or three-class thresholding?:Two classes
+    Log transform before thresholding?:No
+    Assign pixels in the middle intensity class to the foreground or the background?:Foreground
+    Size of adaptive window:50
+    Lower outlier fraction:0.05
+    Upper outlier fraction:0.05
+    Averaging method:Mean
+    Variance method:Standard deviation
+    # of deviations:2.0
+    Thresholding method:Otsu
+
+MeasureImageIntensity:[module_num:42|svn_version:'Unknown'|variable_revision_number:4|show_window:False|notes:['Measure itensity of ‘finalSignalMask’ image to get itensity of "background" pixels (FISH signals, nuclei, cell bodies, and debris exlcuded by masking).']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select images to measure:finalSignalMask
+    Measure the intensity only from areas enclosed by objects?:No
+    Select input object sets:
+    Calculate custom percentiles:No
+    Specify percentiles to measure:10,90
+
+MeasureObjectIntensity:[module_num:43|svn_version:'Unknown'|variable_revision_number:4|show_window:False|notes:['Measure itensity of NulcearBackgroundSignal objects in signal channel (MaskSignal_noInv).']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select images to measure:MaskSignal_noInv
+    Select objects to measure:NuclearBackgroundSignal
+
+MeasureObjectIntensity:[module_num:44|svn_version:'Unknown'|variable_revision_number:4|show_window:False|notes:['Measure intensity of FISHsignals in OrigSignal image.']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select images to measure:A594corrected
+    Select objects to measure:a594CYcoloc
+
+EnhanceOrSuppressFeatures:[module_num:45|svn_version:'Unknown'|variable_revision_number:7|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:YFPcorrected
+    Name the output image:EnhanceSpeckle
+    Select the operation:Enhance
+    Feature size:30
+    Feature type:Speckles
+    Range of hole sizes:1,10
+    Smoothing scale:2.0
+    Shear angle:0.0
+    Decay:0.95
+    Enhancement method:Tubeness
+    Speed and accuracy:Slow
+    Rescale result image:No
+
+MaskImage:[module_num:46|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:EnhanceSpeckle
+    Name the output image:SpeckleNucleus
+    Use objects or an image as a mask?:Objects
+    Select object for mask:preNucleiWithEdges
+    Select image for mask:None
+    Invert the mask?:No
+
+OverlayOutlines:[module_num:47|svn_version:'Unknown'|variable_revision_number:4|show_window:True|notes:['Create new image files as reference of tss calling']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Display outlines on a blank image?:No
+    Select image on which to display outlines:EnhanceSpeckle
+    Name the output image:OrigOverlay
+    Outline display mode:Color
+    Select method to determine brightness of outlines:Max of image
+    How to outline:Thick
+    Select outline color:#3BFF20
+    Select objects to display:preNucleiWithEdges
+    Select outline color:#CF17BC
+    Select objects to display:a594CYcoloc
+
+IdentifyPrimaryObjects:[module_num:48|svn_version:'Unknown'|variable_revision_number:15|show_window:False|notes:['identify speckle']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:EnhanceSpeckle
+    Name the primary objects to be identified:SpeckleFinal
+    Typical diameter of objects, in pixel units (Min,Max):5,40
+    Discard objects outside the diameter range?:Yes
+    Discard objects touching the border of the image?:Yes
+    Method to distinguish clumped objects:Intensity
+    Method to draw dividing lines between clumped objects:Intensity
+    Size of smoothing filter:10
+    Suppress local maxima that are closer than this minimum allowed distance:7.0
+    Speed up by using lower-resolution image to find local maxima?:Yes
+    Fill holes in identified objects?:After both thresholding and declumping
+    Automatically calculate size of smoothing filter for declumping?:Yes
+    Automatically calculate minimum allowed distance between local maxima?:Yes
+    Handling of objects if excessive number of objects identified:Continue
+    Maximum number of objects:500
+    Use advanced settings?:Yes
+    Threshold setting version:12
+    Threshold strategy:Adaptive
+    Thresholding method:Minimum Cross-Entropy
+    Threshold smoothing scale:1.3488
+    Threshold correction factor:0.5
+    Lower and upper bounds on threshold:0.0,1.0
+    Manual threshold:0.0
+    Select the measurement to threshold with:None
+    Two-class or three-class thresholding?:Two classes
+    Log transform before thresholding?:No
+    Assign pixels in the middle intensity class to the foreground or the background?:Foreground
+    Size of adaptive window:80
+    Lower outlier fraction:0.05
+    Upper outlier fraction:0.05
+    Averaging method:Mean
+    Variance method:Standard deviation
+    # of deviations:2.0
+    Thresholding method:Otsu
+
+MeasureObjectNeighbors:[module_num:49|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select objects to measure:a594CYcoloc
+    Select neighboring objects to measure:SpeckleFinal
+    Method to determine neighbors:Expand until adjacent
+    Neighbor distance:50
+    Consider objects discarded for touching image border?:Yes
+    Retain the image of objects colored by numbers of neighbors?:No
+    Name the output image:ObjectNeighborCount
+    Select colormap:Blues
+    Retain the image of objects colored by percent of touching pixels?:No
+    Name the output image:PercentTouching
+    Select colormap:Oranges
+
+MeasureObjectIntensity:[module_num:50|svn_version:'Unknown'|variable_revision_number:4|show_window:False|notes:['measure TS intensity in a594 corrected ']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select images to measure:A594corrected
+    Select objects to measure:NuclearBackgroundSignal, a594CYcoloc
+
+RelateObjects:[module_num:51|svn_version:'Unknown'|variable_revision_number:5|show_window:False|notes:['Create a parent-child relationship between the NuclearBackgroundSignal and FISHsignals objects, allowing the per-nucleus signal:noise to be later computed.']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Parent objects:NuclearBackgroundSignal
+    Child objects:a594CYcoloc
+    Calculate child-parent distances?:None
+    Calculate per-parent means for all child measurements?:Yes
+    Calculate distances to other parents?:No
+    Do you want to save the children with parents as a new object set?:No
+    Name the output object:None
+    Parent name:None
+
+MeasureObjectSizeShape:[module_num:52|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select object sets to measure:SpeckleFinal
+    Calculate the Zernike features?:Yes
+    Calculate the advanced features?:No
+
+IdentifySecondaryObjects:[module_num:53|svn_version:'Unknown'|variable_revision_number:10|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:False|wants_pause:False]
+    Select the input objects:a594Top2
+    Name the objects to be identified:cy3ForA594
+    Select the method to identify the secondary objects:Propagation
+    Select the input image:CY3_in_Nuclei
+    Number of pixels by which to expand the primary objects:10
+    Regularization factor:0.05
+    Discard secondary objects touching the border of the image?:No
+    Discard the associated primary objects?:No
+    Name the new primary objects:FilteredNuclei
+    Fill holes in identified objects?:Yes
+    Threshold setting version:12
+    Threshold strategy:Global
+    Thresholding method:Minimum Cross-Entropy
+    Threshold smoothing scale:0.0
+    Threshold correction factor:1.0
+    Lower and upper bounds on threshold:0.0,1.0
+    Manual threshold:0.0
+    Select the measurement to threshold with:None
+    Two-class or three-class thresholding?:Two classes
+    Log transform before thresholding?:No
+    Assign pixels in the middle intensity class to the foreground or the background?:Foreground
+    Size of adaptive window:50
+    Lower outlier fraction:0.05
+    Upper outlier fraction:0.05
+    Averaging method:Mean
+    Variance method:Standard deviation
+    # of deviations:2.0
+    Thresholding method:Minimum Cross-Entropy
+
+SaveImages:[module_num:54|svn_version:'Unknown'|variable_revision_number:16|show_window:False|notes:['Savely newly created images from previous step.']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the type of image to save:Image
+    Select the image to save:OrigOverlay
+    Select method for constructing file names:From image filename
+    Select image name for file prefix:A594
+    Enter single file name:OrigBlue
+    Number of digits:4
+    Append a suffix to the image file name?:Yes
+    Text to append to the image name:_segmentation
+    Saved file format:png
+    Output file location:Default Input Folder sub-folder|Desktop/07022021_nutlinctcf/neg_dmso/auto
+    Image bit depth:8-bit integer
+    Overwrite existing files without warning?:Yes
+    When to save:Every cycle
+    Record the file and path information to the saved image?:No
+    Create subfolders in the output folder?:No
+    Base image folder:Elsewhere...|
+    How to save the series:T (Time)
+    Save with lossless compression?:No
+
+ExportToSpreadsheet:[module_num:55|svn_version:'Unknown'|variable_revision_number:13|show_window:False|notes:['Output relevant data to .csv file.']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the column delimiter:Tab
+    Add image metadata columns to your object data file?:No
+    Add image file and folder names to your object data file?:No
+    Select the measurements to export:Yes
+    Calculate the per-image mean values for object measurements?:No
+    Calculate the per-image median values for object measurements?:No
+    Calculate the per-image standard deviation values for object measurements?:No
+    Output file location:Default Input Folder sub-folder|Desktop/07022021_nutlinctcf/neg_dmso/auto
+    Create a GenePattern GCT file?:No
+    Select source of sample row name:Metadata
+    Select the image to use as the identifier:None
+    Select the metadata to use as the identifier:None
+    Export all measurement types?:Yes
+    Press button to select measurements:a594CYcoloc|Neighbors_NumberOfNeighbors_SpeckleFinal_Expanded,a594CYcoloc|Neighbors_PercentTouching_SpeckleFinal_Expanded,a594CYcoloc|Neighbors_SecondClosestDistance_SpeckleFinal_Expanded,a594CYcoloc|Neighbors_SecondClosestObjectNumber_SpeckleFinal_Expanded,a594CYcoloc|Neighbors_FirstClosestDistance_SpeckleFinal_Expanded,a594CYcoloc|Neighbors_FirstClosestObjectNumber_SpeckleFinal_Expanded,a594CYcoloc|Neighbors_AngleBetweenNeighbors_SpeckleFinal_Expanded,a594CYcoloc|Location_Center_Y,a594CYcoloc|Location_Center_X,a594CYcoloc|Location_MaxIntensity_Z_A594corrected,a594CYcoloc|Location_MaxIntensity_X_A594corrected,a594CYcoloc|Location_MaxIntensity_Y_A594corrected,a594CYcoloc|Location_CenterMassIntensity_Z_A594corrected,a594CYcoloc|Location_CenterMassIntensity_X_A594corrected,a594CYcoloc|Location_CenterMassIntensity_Y_A594corrected,a594CYcoloc|Intensity_StdIntensity_A594corrected,a594CYcoloc|Intensity_MinIntensityEdge_A594corrected,a594CYcoloc|Intensity_MaxIntensity_A594corrected,a594CYcoloc|Intensity_UpperQuartileIntensity_A594corrected,a594CYcoloc|Intensity_MeanIntensity_A594corrected,a594CYcoloc|Intensity_MassDisplacement_A594corrected,a594CYcoloc|Intensity_StdIntensityEdge_A594corrected,a594CYcoloc|Intensity_IntegratedIntensityEdge_A594corrected,a594CYcoloc|Intensity_MedianIntensity_A594corrected,a594CYcoloc|Intensity_MeanIntensityEdge_A594corrected,a594CYcoloc|Intensity_MaxIntensityEdge_A594corrected,a594CYcoloc|Intensity_IntegratedIntensity_A594corrected,a594CYcoloc|Intensity_MinIntensity_A594corrected,a594CYcoloc|Intensity_LowerQuartileIntensity_A594corrected,a594CYcoloc|Intensity_MADIntensity_A594corrected,a594CYcoloc|Parent_NuclearBackgroundSignal,a594CYcoloc|Parent_a594signals,a594CYcoloc|Number_Object_Number,SpeckleFinal|AreaShape_Perimeter,SpeckleFinal|AreaShape_Zernike_6_4,SpeckleFinal|AreaShape_Zernike_6_6,SpeckleFinal|AreaShape_Zernike_6_0,SpeckleFinal|AreaShape_Zernike_6_2,SpeckleFinal|AreaShape_Zernike_7_7,SpeckleFinal|AreaShape_Zernike_7_5,SpeckleFinal|AreaShape_Zernike_7_1,SpeckleFinal|AreaShape_Zernike_7_3,SpeckleFinal|AreaShape_Zernike_8_4,SpeckleFinal|AreaShape_Zernike_8_2,SpeckleFinal|AreaShape_Zernike_8_8,SpeckleFinal|AreaShape_Zernike_8_0,SpeckleFinal|AreaShape_Zernike_8_6,SpeckleFinal|AreaShape_Zernike_5_1,SpeckleFinal|AreaShape_Zernike_5_5,SpeckleFinal|AreaShape_Zernike_5_3,SpeckleFinal|AreaShape_Zernike_3_3,SpeckleFinal|AreaShape_Zernike_3_1,SpeckleFinal|AreaShape_Zernike_0_0,SpeckleFinal|AreaShape_Zernike_1_1,SpeckleFinal|AreaShape_Zernike_4_0,SpeckleFinal|AreaShape_Zernike_4_4,SpeckleFinal|AreaShape_Zernike_4_2,SpeckleFinal|AreaShape_Zernike_9_1,SpeckleFinal|AreaShape_Zernike_9_9,SpeckleFinal|AreaShape_Zernike_9_7,SpeckleFinal|AreaShape_Zernike_9_5,SpeckleFinal|AreaShape_Zernike_9_3,SpeckleFinal|AreaShape_Zernike_2_0,SpeckleFinal|AreaShape_Zernike_2_2,SpeckleFinal|AreaShape_Compactness,SpeckleFinal|AreaShape_BoundingBoxMinimum_X,SpeckleFinal|AreaShape_BoundingBoxMinimum_Y,SpeckleFinal|AreaShape_ConvexArea,SpeckleFinal|AreaShape_MinorAxisLength,SpeckleFinal|AreaShape_MaximumRadius,SpeckleFinal|AreaShape_Area,SpeckleFinal|AreaShape_BoundingBoxArea,SpeckleFinal|AreaShape_MaxFeretDiameter,SpeckleFinal|AreaShape_MinFeretDiameter,SpeckleFinal|AreaShape_Eccentricity,SpeckleFinal|AreaShape_Orientation,SpeckleFinal|AreaShape_Extent,SpeckleFinal|AreaShape_Center_Y,SpeckleFinal|AreaShape_Center_X,SpeckleFinal|AreaShape_BoundingBoxMaximum_X,SpeckleFinal|AreaShape_BoundingBoxMaximum_Y,SpeckleFinal|AreaShape_Solidity,SpeckleFinal|AreaShape_EulerNumber,SpeckleFinal|AreaShape_FormFactor,SpeckleFinal|AreaShape_EquivalentDiameter,SpeckleFinal|AreaShape_MajorAxisLength,SpeckleFinal|AreaShape_MedianRadius,SpeckleFinal|AreaShape_MeanRadius,SpeckleFinal|Location_Center_Y,SpeckleFinal|Location_Center_Z,SpeckleFinal|Location_Center_X,SpeckleFinal|Number_Object_Number,NuclearBackgroundSignal|Intensity_IntegratedIntensity_MaskSignal_noInv,NuclearBackgroundSignal|Intensity_MeanIntensity_MaskSignal_noInv
+    Representation of Nan/Inf:NaN
+    Add a prefix to file names?:Yes
+    Filename prefix:negnut6hr
+    Overwrite existing files without warning?:No
+    Data to export:Image
+    Combine these object measurements with those of the previous object?:No
+    File name:DATA.csv
+    Use the object name for the file name?:Yes
