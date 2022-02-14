@@ -1,3 +1,33 @@
+
+Upgrade v1.2 2/14/2022:
+
+Adjusted export to include paired background intensity measurements, speckle & nuclear size/shape.
+I use the following bash code to loop through input folders. Note the file-list will need absolute path, one file per row.
+
+```
+for d in */
+do
+echo $d
+echo /Users/ruofany/Desktop/11182021cocl2timepoint/result/"$d"
+cd $d
+#create a file list
+realpath *.tiff > file_list.txt
+#run
+cellprofiler -c -r -p /Users/ruofany/OneDrive/seqseq/cellprofilerpipeline/TSQuant_RYAuto_v1.2_1.cppipe -i /Users/ruofany/Desktop/11182021cocl2timepoint/maxp/"$d" -o /Users/ruofany/Desktop/11182021cocl2timepoint/result/"$d" --file-list=./file_list.txt --conserve-memory=true
+#change filename for post processing
+    for f in *.txt
+    do
+    mv "$f" "$name_$f"
+    done
+cd /Users/ruofany/Desktop/11182021cocl2timepoint/maxp
+done
+
+
+```
+
+
+########################################################################
+
 Upgrade v1.1 2/9/2022:
 
 Adjusted some settings for our new scope, should deal better with noisy background.
