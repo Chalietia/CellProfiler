@@ -1,4 +1,9 @@
+Fociquant 5/9/2022:
 
+Updated pipeline for DNA/RNA foci quantification. Performs better than previous version.
+
+
+########################################################################
 Upgrade v1.2 2/14/2022:
 
 Adjusted export to include paired background intensity measurements, speckle & nuclear size/shape.
