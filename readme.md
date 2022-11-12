@@ -2,6 +2,9 @@ Upgrade v1.2 11/12/2022:
 Updated to speckQuant, now using morph instead of cellprofiler's MeasureObjectNeighbors function.
 This makes it possible to measure distance from DNA-FISH foci to the edge of speckle.
 
+A foci-foci distance comparison made this pipeline vs. rajlabimagetool (https://github.com/arjunrajlaboratory/rajlabimagetools) is shown below:
+With an R=0.81
+![alt text](https://github.com/Chalietia/CellProfiler/blob/main/misc/Screen%20Shot%202022-11-12%20at%202.46.56%20PM.png)
 ########################################################################
 Fociquant 5/9/2022:
 
