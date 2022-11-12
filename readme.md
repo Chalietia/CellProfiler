@@ -1,3 +1,8 @@
+Upgrade v1.2 11/12/2022:
+Updated to speckQuant, now using morph instead of cellprofiler's MeasureObjectNeighbors function.
+This makes it possible to measure distance from DNA-FISH foci to the edge of speckle.
+
+########################################################################
 Fociquant 5/9/2022:
 
 Updated pipeline for DNA/RNA foci quantification. Performs better than previous version.
