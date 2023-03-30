@@ -1,9 +1,11 @@
 Upgrade v2.4 03/30/2023:
 
+
 Minor adjustment, now including filtering of nucleus based on number of child object (DNA-FISH foci or speckle number).
 
 
 ########################################################################
+
 Upgrade v1.2 11/12/2022:
 
 Updated to speckQuant, now using morph instead of cellprofiler's MeasureObjectNeighbors function.
