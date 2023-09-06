@@ -3,7 +3,8 @@ Current pipelines:
 1. Maxprojection*: For generating max projected tiff from .nd2 file.
 2. SpecQuant*: For measurement of the distance between each DNA-FISH foci and the edge of its closest nuclear speckle.
 3. SpecQuant*Mask: Same as 2., just adding another step to call the positively transfected cell.
-4. SpeckleSPEC: Measure size and shape of nuclear speckles. 
+4. SpeckleSPEC: Measure size and shape of nuclear speckles.
+5. SpecQuantPostprocess.R: generating final cytological distance output from CellProfiler results.   
 
 ########################################################################
 Upgrade v2.4 03/30/2023:
