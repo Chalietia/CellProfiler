@@ -1,7 +1,7 @@
 Current pipelines:
 
 1. Maxprojection*: For generating max projected tiff from .nd2 file.
-2. ChannelSplit_auto: Split channels from .nd2 file. Support multiple processing of .nd2 files.
+2. splitchannel: Split channels from .nd2 file. Support multiple processing of .nd2 files.
 3. SpecQuant*: For measurement of the distance between each DNA-FISH foci and the edge of its closest nuclear speckle.
 4. SpecQuant*Mask: Same as 2., just adding another step to call the positively transfected cell.
 5. SpeckleSPEC: Measure size and shape of nuclear speckles.
